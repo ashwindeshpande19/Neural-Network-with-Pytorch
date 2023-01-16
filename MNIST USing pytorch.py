@@ -31,7 +31,7 @@ class ImageClassifier(nn.Module):
   
   
   
-clf = ImageClassifier().to('cuda')
+clf = ImageClassifier().to('cuda') #replace 'cuda' with 'cpu' if you don't have a gpu
 opt = Adam(clf.parameters(), lr= 1e-3)
 loss_fn = nn.CrossEntropyLoss()
 
@@ -43,7 +43,7 @@ if __name__ == "__main__" :
   for epoch in range(10) :
     for batch in dataset:
       X,y = batch
-      X,y = X.to('cuda'), y.to('cuda')
+      X,y = X.to('cuda'), y.to('cuda') #replace 'cuda' with 'cpu' if you don't have a gpu
       yhat = clf(X)
       loss = loss_fn(yhat,y)
 
@@ -67,5 +67,5 @@ with open('model_state.pt', 'rb') as f:
  
 
 img = Image.open('img_3.jpg')
-img_tensor = ToTensor() (img).unsqueeze(0).to('cuda')
+img_tensor = ToTensor() (img).unsqueeze(0).to('cuda') #replace 'cuda' with 'cpu' if you don't have a gpu
 print(torch.argmax(clf(img_tensor)))
